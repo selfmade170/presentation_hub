@@ -5,3 +5,11 @@ db.sqlite3
 *.log
 staticfiles/
 mediafiles/
+*.pdf
+*.zip
+mediafiles/
+staticfiles/
+*.zip
+*.pdf
+mediafiles/
+staticfiles/
