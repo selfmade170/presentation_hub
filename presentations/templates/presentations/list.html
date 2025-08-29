@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}База презентаций{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">📂 База презентаций</h1>
+
+    <!-- Поиск -->
+    <form method="get" class="d-flex mb-4" role="search">
+        <input class="form-control me-2"
+               type="search"
+               placeholder="Поиск по презентациям..."
+               aria-label="Search"
+               name="q"
+               value="{{ query|default:'' }}">
+        <button class="btn btn-outline-primary" type="submit">🔍 Найти</button>
+    </form>
+
+    {% if presentations %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for presentation in presentations %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ presentation.title }}</h5>
+                            <p class="text-muted small">Загружено: {{ presentation.uploaded_at|date:"d.m.Y" }}</p>
+                            <p>{{ presentation.description|default:"Описание отсутствует" }}</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="{{ presentation.file.url }}" class="btn btn-success btn-sm" download>⬇ Скачать</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">Презентаций не найдено.</div>
+    {% endif %}
+</div>
+{% endblock %}
